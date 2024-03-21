@@ -2,6 +2,9 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import sequelize from "./connection";
+// import createUserRoute from "./router/user.router";
+import UserRouter from "./router/user.router";
+
 
 dotenv.config();
 
@@ -29,6 +32,8 @@ app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
     }
   } catch (e) {}
 });
+
+app.use("/api/user", UserRouter)
 
 app.listen(port, async () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
