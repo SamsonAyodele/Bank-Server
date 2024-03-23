@@ -12,10 +12,6 @@ const app: Express = express();
 const port = process.env.PORT || 3000;
 
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to My bank app");
-});
-
 app.use(express.json);
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -34,6 +30,10 @@ app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use("/api/user", UserRouter)
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("Welcome to My bank app");
+});
 
 app.listen(port, async () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
