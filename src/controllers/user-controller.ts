@@ -46,6 +46,7 @@ class UserController {
       }
       //Create user
       let user = await this.userService.createUser(newUser);
+      console.log(user)
       user.password = "";
       return utility.handleSuccess(res, "User created successfully", { user }, ResponseCode.SUCCESS);
     } catch (error) {
