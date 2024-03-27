@@ -22,7 +22,7 @@ const createUserRoute = () => {
     return userController.login(req, res);
   });
 
-  router.post("/forgot-Password", validator(ValidationSchema.forgotPasswordSchema), (req: Request, res: Response) => {
+  router.post("/forgot-password", validator(ValidationSchema.forgotPasswordSchema), (req: Request, res: Response) => {
     return userController.forgotPassword(req, res);
   });
 
