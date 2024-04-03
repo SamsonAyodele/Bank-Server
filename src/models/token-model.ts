@@ -46,7 +46,9 @@ const TokenModel = sequelize.define<ITokenModel>(
     }
 },{
     timestamps: true,
-    tableName: 'tokens'
+    tableName: 'tokens',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 });
 
 export default TokenModel

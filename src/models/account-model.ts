@@ -1,50 +1,39 @@
 import sequelize from "../connection";
 import { DataTypes } from "sequelize";
-import { IUserModel } from "../interfaces/user-interface";
+import { IAccountModel } from "../interfaces/account-interface";
 import {v4 as uuidv4} from 'uuid'
 
 
-const UserModel = sequelize.define<IUserModel>(
-'UserModel',{
+const AccountModel = sequelize.define<IAccountModel>(
+'AccountModel',{
     id: {
         type: DataTypes.UUID,
         defaultValue: ()=> uuidv4(),
         allowNull: false,
         primaryKey: true
     },
-    username: {
+    userId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    accountNumber:{
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    password:{
+    balance: {
+        type: DataTypes.DECIMAL(30, 2),
+        defaultValue: 0.00,
+        allowNull: false
+    },
+    type:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    firstName: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    lastName:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    email:{
+    status:{
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
-    },
-    role:{
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    isEmailVerified: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    accountStatus: {
-        type: DataTypes.STRING,
-        allowNull: true,
     },
     createdAt:{
         type: DataTypes.DATE,
@@ -58,9 +47,9 @@ const UserModel = sequelize.define<IUserModel>(
     }
 },{
     timestamps: true,
-    tableName: 'users',
+    tableName: 'accounts',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 });
 
-export default UserModel
+export default AccountModel

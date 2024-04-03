@@ -6,18 +6,24 @@ const logger = createLogger({
     new transports.File({
       filename: "./logs/index.log",
       level: "error",
-      format: format.combine(format.timestamp({format: "YYYY-MM-DD HH-mm-ss" }), 
-      format.printf((info)=>`${info.timestamp} ${info.level} : ${info.message}`)) 
+      format: format.combine(
+        format.timestamp({ format: "YYYY-MM-DD HH-mm-ss" }),
+        format.printf((info) => `${info.timestamp} ${info.level} : ${info.message}`)
+      ),
     }),
-  ]
+  ],
 });
+
+const isEmpty = (data: any) => {
+  return !data || data.length === 0 || typeof data === "undefined" || data == null || Object.keys(data).length == 0;
+};
 
 const handleSuccess = (res: Response, message: string, data: {}, statusCode: number = 200) => {
   return res.status(statusCode).json({ status: true, message, data: { ...data } });
 };
 
 const handleError = (res: Response, message: string, statusCode: number = 400) => {
-    logger.log({level: 'error', message})
+  logger.log({ level: "error", message });
   return res.status(statusCode).json({ status: false, message });
 };
 
@@ -30,6 +36,7 @@ const generateCode = (num: number = 15) => {
 };
 
 const utility = {
+  isEmpty,
   handleSuccess,
   handleError,
   generateCode,

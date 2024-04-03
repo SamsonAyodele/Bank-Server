@@ -1,0 +1,4 @@
+2024-04-03 11-50-53 error : email is a required field
+2024-04-03 11-52-03 error : email is a required field
+2024-04-03 11-58-01 error : type must be one of the following values: SAVINGS, CURRENT_ACCOUNT, FIXED_SAVINGS_ACCOUNT
+2024-04-03 12-00-55 error : Authorization failed
