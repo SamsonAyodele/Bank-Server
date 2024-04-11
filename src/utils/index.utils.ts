@@ -35,11 +35,26 @@ const generateCode = (num: number = 15) => {
   return result.toUpperCase();
 };
 
+const parseToObject = (value: string): any => {
+let counter = 0 
+let data = JSON.parse(value)
+while(counter <= 2){
+  if(typeof data == 'object'){
+    break
+  }else{
+    data = JSON.parse(data)
+    counter++
+  }
+}
+return data 
+}
+
 const utility = {
   isEmpty,
   handleSuccess,
   handleError,
   generateCode,
+  parseToObject
 };
 
 export default utility;

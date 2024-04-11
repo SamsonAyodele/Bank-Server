@@ -5,6 +5,7 @@ import cors from "cors";
 import dbInit from "./src/database/init"
 import UserRouter from "./src/router/user.router";
 import AccountRouter from "./src/router/account.router";
+import TransactionRouter from "./src/router/transaction-router"
 const port = process.env.PORT;
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
 
 app.use("/api/user", UserRouter);
 app.use("/api/account", AccountRouter);
+app.use("/api/transaction", TransactionRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send(`Welcome to My ${process.env.APP_NAME}`);
@@ -46,15 +48,3 @@ const Bootstrap = async () => {
 
 Bootstrap()
 
-// app.listen(port, async () => {
-//   console.log(`[server]: Server is running on port ${port}`);
-//   try {
-//     // sync all models
-//     await sequelize.sync({ alter: true });
-//     console.log("All models synchronized successfully.");
-//     await sequelize.authenticate();
-//     console.log("Connection has been established successfully.");
-//   } catch (error) {
-//     console.error("Unable to connect to the database:", error);
-//   }
-// });

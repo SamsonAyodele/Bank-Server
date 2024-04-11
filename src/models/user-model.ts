@@ -1,10 +1,10 @@
-import sequelize from "../connection";
+import db from "../database";
 import { DataTypes } from "sequelize";
 import { IUserModel } from "../interfaces/user-interface";
 import {v4 as uuidv4} from 'uuid'
 
 
-const UserModel = sequelize.define<IUserModel>(
+const UserModel = db.define<IUserModel>(
 'UserModel',{
     id: {
         type: DataTypes.UUID,

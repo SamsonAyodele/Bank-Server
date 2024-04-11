@@ -1,10 +1,10 @@
-import sequelize from "../connection";
+import db from "../database";
 import { DataTypes } from "sequelize";
 import { IAccountModel } from "../interfaces/account-interface";
 import {v4 as uuidv4} from 'uuid'
 
 
-const AccountModel = sequelize.define<IAccountModel>(
+const AccountModel = db.define<IAccountModel>(
 'AccountModel',{
     id: {
         type: DataTypes.UUID,

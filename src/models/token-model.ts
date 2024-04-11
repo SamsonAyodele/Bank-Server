@@ -1,10 +1,10 @@
-import sequelize from "../connection";
+import db from "../database";
 import { DataTypes } from "sequelize";
 import { ITokenModel } from "../interfaces/token-interface";
 import {v4 as uuidv4} from 'uuid'
 
 
-const TokenModel = sequelize.define<ITokenModel>(
+const TokenModel = db.define<ITokenModel>(
 'TokenModel',{
     id: {
         type: DataTypes.UUID,

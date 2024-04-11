@@ -1,15 +1,6 @@
-import bcrypt from "bcrypt";
-import JWT from "jsonwebtoken";
-import { AccountStatus, EmailStatus, UserRoles } from "../interfaces/enum/user-enum";
-import { IUserCreationBody } from "../interfaces/user-interface";
-import UserService from "../services/user-service";
 import { Request, Response } from "express";
 import utility from "../utils/index.utils";
 import { ResponseCode } from "../interfaces/enum/code.enum";
-import TokenService from "../services/token-service";
-import { IToken } from "../interfaces/token-interface";
-import EmailService from "../services/email-service";
-import moment from "moment";
 import AccountService from "../services/account-service";
 
 class AccountController {
