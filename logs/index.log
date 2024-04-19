@@ -2,3 +2,17 @@
 2024-04-03 11-52-03 error : email is a required field
 2024-04-03 11-58-01 error : type must be one of the following values: SAVINGS, CURRENT_ACCOUNT, FIXED_SAVINGS_ACCOUNT
 2024-04-03 12-00-55 error : Authorization failed
+2024-04-11 13-00-34 error : Authorization failed
+2024-04-11 13-34-28 error : Authorization failed
+2024-04-11 13-42-22 error : Authorization failed
+2024-04-11 13-56-18 error : Email already exist
+2024-04-11 13-57-54 error : Invalid login details
+2024-04-13 02-04-59 error : Email already exist
+2024-04-13 14-34-21 error : Authorization failed
+2024-04-13 14-34-54 error : Authorization failed
+2024-04-13 14-58-42 error : Authorization failed
+2024-04-13 14-58-46 error : Authorization failed
+2024-04-18 10-22-51 error : firstName is a required field
+2024-04-18 10-23-08 error : password must be at least 6 characters
+2024-04-18 10-23-16 error : Email already exist
+2024-04-19 08-23-26 error : Authorization failed

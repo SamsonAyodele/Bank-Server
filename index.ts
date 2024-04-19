@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-// import sequelize from "./src/connection";
 import dbInit from "./src/database/init"
 import UserRouter from "./src/router/user.router";
 import AccountRouter from "./src/router/account.router";

@@ -30,17 +30,17 @@ export const Auth = () => {
       const user = await userService.getUserByField({id: decoded.id})
 
       if(!user){
-        throw new TypeError('Authorization failed')
+        throw new TypeError('Authorization failed user')
       }
 
       if(user.accountStatus == 'DELETED'){
-        throw new TypeError('Authorization failed')
+        throw new TypeError('Authorization failed deleted')
       }
 
       req.body.user = decoded
       next();
      }else {
-      throw new TypeError('Authorization failed')
+      throw new TypeError('Authorization failed server')
      }
 
     } catch (error: any) {

@@ -13,7 +13,7 @@ const transactionController = new TransactionController(transactionService);
 
 const createTransactionRoute = () => {
 
-  router.post("/initiatePaystackDeposit", validator(ValidationSchema.initiatePaystackDeposit), Auth(), (req: Request, res: Response) => {
+  router.post("/initiate-Paystack-Deposit", validator(ValidationSchema.initiatePaystackDeposit), Auth(), (req: Request, res: Response) => {
     return transactionController.initiatePaystackDeposit(req, res);
   });
 

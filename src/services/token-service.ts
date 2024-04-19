@@ -22,35 +22,36 @@ class TokenService {
     return this.tokenDataSource.fetchOne(query);
   }
 
-  async createForgotPasswordToken(email: string): Promise<IToken | null> {
+  async createForgotPasswordToken(email : string): Promise<IToken | null> {
     const tokenData = {
-      key: email,
-      type: this.TokenTypes.FORGOT_PASSWORD,
-      expires: moment().add(this.tokenExpires, "minutes").toDate(),
-      status: this.TokenStatus.USED,
-    } as ITokenCreationBody;
-    let token = this.createToken(tokenData);
+        key : email,
+        type:this.TokenTypes.FORGOT_PASSWORD,
+        expires:moment().add(this.tokenExpires, 'minutes').toDate(),
+        status : this.TokenStatus.NOT_USED
+ 
+    } as ITokenCreationBody
+    let token = await this.createToken(tokenData);
     return token;
   }
 
   async createToken(record: ITokenCreationBody) {
-    const tokenData = { ...record };
+    const tokenData = {...record};
     let validCode = false;
-    while (!validCode) {
-      tokenData.code = utility.generateCode(6);
-      //fetch token from database
-      const isCodeExist = this.getTokenByField({ code: tokenData.code });
-      if (!isCodeExist) {
-        validCode = true;
-        break;
-      }
+    while(!validCode){
+        tokenData.code = utility.generateCode(6);
+        //fetch this token from the database
+        const isCodeExist = await this.getTokenByField({code : tokenData.code});
+        if(!isCodeExist){
+           validCode = true;
+           break; 
+        }
     }
     return this.tokenDataSource.create(tokenData);
   }
 
-  async updateRecord(searchBy: Partial<IToken>, record: Partial<IToken>): Promise<void>{
-    const query = {where: {...searchBy}, raw: true} as IFindTokenQuery
-    return this.tokenDataSource.updateOne(record, query)
+  async updateRecord(searchBy : Partial<IToken> , record : Partial<IToken>):Promise<void>{
+    const query = { where : {...searchBy} ,  raw:true } as IFindTokenQuery;
+    await this.tokenDataSource.updateOne(record , query);
   }
 }
 

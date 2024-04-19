@@ -93,9 +93,9 @@ class UserController {
         return utility.handleError(res, "Account does not exist", ResponseCode.NOT_FOUND);
       }
 
-      const token = await this.tokenService.createForgotPasswordToken(params.email) as IToken
-      await EmailService.sendForgotPasswordMail(params.email, token.code)
-      return utility.handleSuccess(res, "Forgot password code sent successfully", { }, ResponseCode.SUCCESS);
+      const token = (await this.tokenService.createForgotPasswordToken(params.email)) as IToken
+      // await EmailService.sendForgotPasswordMail(params.email, token.code)
+      return utility.handleSuccess(res, "Password reset code has been sent to your mail", {}, ResponseCode.SUCCESS);
   
     } catch (error) {
       return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
