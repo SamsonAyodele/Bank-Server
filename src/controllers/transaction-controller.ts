@@ -50,7 +50,7 @@ class TransactionController {
         }
     }
 
-    async verifyPaystackTransaction(req: Request, res: Response) {
+    async verifyPaystackDeposit(req: Request, res: Response) {
         try {
             const params = {...req.body}
             const transaction = await this.transactionService.fetchTransactionByRefrence(params.reference)
