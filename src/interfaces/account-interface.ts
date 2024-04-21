@@ -1,4 +1,4 @@
-import { Optional, Model } from "sequelize";
+import { Optional, Model, Transaction } from "sequelize";
 
 export interface IAccount {
   id: string;
@@ -16,6 +16,7 @@ export interface IFindAccountQuery {
     [key: string]: string;
   };
   raw?: boolean;
+  transaction?: Transaction
   returning?: boolean;
 }
 

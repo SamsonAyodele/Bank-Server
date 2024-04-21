@@ -94,7 +94,7 @@ class UserController {
       }
 
       const token = (await this.tokenService.createForgotPasswordToken(params.email)) as IToken
-      // await EmailService.sendForgotPasswordMail(params.email, token.code)
+      await EmailService.sendForgotPasswordMail(params.email, token.code)
       return utility.handleSuccess(res, "Password reset code has been sent to your mail", {}, ResponseCode.SUCCESS);
   
     } catch (error) {

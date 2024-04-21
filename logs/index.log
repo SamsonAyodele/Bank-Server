@@ -16,3 +16,26 @@
 2024-04-18 10-23-08 error : password must be at least 6 characters
 2024-04-18 10-23-16 error : Email already exist
 2024-04-19 08-23-26 error : Authorization failed
+2024-04-19 10-17-34 error : Token has expired
+2024-04-19 10-28-05 error : Invalid login details
+2024-04-19 10-29-07 error : Email already exist
+2024-04-19 10-29-24 error : Invalid login details
+2024-04-19 10-31-52 error : Authorization failed
+2024-04-20 07-03-51 error : password must be at least 6 characters
+2024-04-20 07-05-39 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials qq22-20020a17090720d600b00a554f6fbb25sm2993311ejb.138 - gsmtp
+2024-04-20 07-10-36 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials gw5-20020a170906f14500b00a523be56940sm3001649ejb.136 - gsmtp
+2024-04-20 07-11-52 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials k4-20020a50cb84000000b005705bb48307sm2933436edi.42 - gsmtp
+2024-04-20 07-15-24 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials dq16-20020a170907735000b00a524318c380sm3017052ejc.80 - gsmtp
+2024-04-20 07-16-30 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials p10-20020a17090653ca00b00a5587038aefsm1617403ejo.156 - gsmtp
+2024-04-20 07-18-17 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials s13-20020a170906bc4d00b00a553de860c6sm3018711ejv.133 - gsmtp
+2024-04-20 07-33-12 error : Authorization failed
+2024-04-20 07-47-08 error : getaddrinfo ENOTFOUND smtp.gmail.com
+2024-04-20 07-48-13 error : Token has expired
+2024-04-20 07-48-36 error : Token has expired
+2024-04-20 07-51-52 error : Invalid login details
