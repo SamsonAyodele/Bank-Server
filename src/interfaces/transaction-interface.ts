@@ -1,8 +1,13 @@
-import { Optional, Model, Transaction } from "sequelize";
+import { Optional, Model, FindOptions, Transaction } from "sequelize";
 
 export interface IPaystackPaymentObject {
   authorization_url: string;
   access_code: string;
+  reference: string;
+}
+
+export interface IPaystackInitTransferObject {
+  transferCode:string;
   reference: string;
 }
 
@@ -39,6 +44,7 @@ export interface ITransactionModel extends Model<ITransaction, ITransactionCreat
 
 export interface ITransactionDataSource {
   fetchOne(query: IFindTransactionQuery): Promise<ITransaction | null>;
-  create(record: ITransactionCreationBody): Promise<ITransaction>;
+  create(record: ITransactionCreationBody, options?: Partial<IFindTransactionQuery>): Promise<ITransaction>;
   updateOne(data: Partial<ITransaction>, query: IFindTransactionQuery): Promise<void>;
+  fetchAll(query:FindOptions<ITransaction>) : Promise<ITransaction[]>
 }

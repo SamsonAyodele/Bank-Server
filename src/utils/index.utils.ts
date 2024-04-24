@@ -1,5 +1,6 @@
 import { Response } from "express";
 import { createLogger, format, transports } from "winston";
+import { BANKS } from "../interfaces/enum/payee-enum";
 
 const logger = createLogger({
   transports: [
@@ -13,6 +14,10 @@ const logger = createLogger({
     }),
   ],
 });
+
+const  escapeHtml = (html:string) => {
+  return html.replace(/[&<>"']/g, '');
+}
 
 const isEmpty = (data: any) => {
   return !data || data.length === 0 || typeof data === "undefined" || data == null || Object.keys(data).length == 0;
@@ -49,12 +54,22 @@ while(counter <= 2){
 return data 
 }
 
+const getBankName = (bankCode: string): string => {
+  const filter = BANKS.filter(item => (item.code == bankCode))
+  if(filter.length > 0){
+    return filter[0].name
+  }
+  return ''
+}
+
 const utility = {
   isEmpty,
   handleSuccess,
   handleError,
   generateCode,
-  parseToObject
+  parseToObject,
+  escapeHtml,
+  getBankName
 };
 
 export default utility;

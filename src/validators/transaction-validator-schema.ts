@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { AccountTypes } from '../interfaces/enum/account-enum';
+import { BANKCODES } from '../interfaces/enum/payee-enum';
 
 const initiatePaystackDeposit = yup.object({
   amount: yup.number().required(),
@@ -11,9 +11,26 @@ const verifyPaystackDeposit = yup.object({
   reference: yup.string().trim().required()
 })
 
+const makeInternalTransfer = yup.object({
+  senderAccountId: yup.string().trim().required(),
+  receiverAccountNumber: yup.string().trim().required(),
+  amount: yup.number().required()
+})
+
+const makeWithdrawalByPaystack = yup.object({
+  senderAccountId: yup.string().trim().required(),
+  receiverAccountNumber:yup.string().trim().required(),
+  receiverAccountName:yup.string().trim().required(),
+  bankCode:yup.string().trim().required().oneOf(BANKCODES),
+  message:yup.string().trim().required(),
+  amount:yup.number().required(),
+})
+
 const ValidationSchema = {
   initiatePaystackDeposit,
-  verifyPaystackDeposit
+  verifyPaystackDeposit,
+  makeInternalTransfer,
+  makeWithdrawalByPaystack
 };
 
 export default ValidationSchema;

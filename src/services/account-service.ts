@@ -41,6 +41,22 @@ class AccountService {
     return this.accountDataSource.create(record);
   }
 
+  async getAccountByField(record: Partial<IAccount>) {
+    const query = {
+      where: { ...record },
+      raw: true,
+    } as IFindAccountQuery;
+    return this.accountDataSource.fetchOne(query);
+  }
+
+  async getAccountsByUserId(userId: string) {
+    const query = {
+      where: { userId },
+      raw: true,
+    };
+    return this.accountDataSource.fetchAll(query);
+  }
+
   async topUpBalance(accountId: string, amount: number, options: Partial<IFindAccountQuery> = {}) {
     const filter = {where: {id:accountId}, ...options}
     const update = {

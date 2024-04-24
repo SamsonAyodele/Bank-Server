@@ -39,3 +39,17 @@
 2024-04-20 07-48-13 error : Token has expired
 2024-04-20 07-48-36 error : Token has expired
 2024-04-20 07-51-52 error : Invalid login details
+2024-04-22 09-12-27 error : invalid signature
+2024-04-22 09-12-41 error : invalid signature
+2024-04-22 09-13-44 error : Email already exist
+2024-04-22 09-17-15 error : getaddrinfo ENOTFOUND smtp.gmail.com
+2024-04-22 09-22-28 error : Token has expired
+2024-04-22 09-23-29 error : getaddrinfo ENOTFOUND smtp.gmail.com
+2024-04-22 09-24-47 error : invalid signature
+2024-04-22 10-29-09 error : invalid signature
+2024-04-22 10-30-27 error : invalid signature
+2024-04-22 10-35-37 error : invalid signature
+2024-04-22 10-55-57 error : invalid token
+2024-04-22 10-57-40 error : invalid token
+2024-04-22 10-58-31 error : invalid token
+2024-04-22 10-59-05 error : Invalid login details

@@ -1,4 +1,4 @@
-import { Optional, Model, Transaction } from "sequelize";
+import { Optional, Model, FindOptions, Transaction } from "sequelize";
 
 export interface IAccount {
   id: string;
@@ -28,4 +28,5 @@ export interface IAccountDataSource {
   fetchOne(query: IFindAccountQuery): Promise<IAccount | null>;
   create(record: IAccountCreationBody): Promise<IAccount>;
   updateOne(searchBy: IFindAccountQuery, data: Partial<IAccount>): Promise<void>
+  fetchAll(query:FindOptions<IAccount>) : Promise<IAccount[]>
 }
