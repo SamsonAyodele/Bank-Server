@@ -21,8 +21,10 @@
     "mysql2": "^3.9.2",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0",
+    "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.1",
     "ts-node": "^10.9.2",
+    "tsyringe": "^4.8.0",
     "uuid": "^9.0.1",
     "winston": "^3.13.0",
     "yup": "^1.4.0"

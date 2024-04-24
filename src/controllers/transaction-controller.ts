@@ -9,7 +9,9 @@ import AccountService from "../services/account-service"
 import { IAccount } from "../interfaces/account-interface"
 import { ITransaction } from "../interfaces/transaction-interface"
 import PayeeService from "../services/payee-service"
+import { autoInjectable } from "tsyringe"
 
+@autoInjectable()
 class TransactionController {
     private transactionService : TransactionService
     private accountService : AccountService

@@ -1,12 +1,15 @@
 import { where } from "sequelize";
-import { IFindPayeeQuery, IPayee, IPayeeCreationBody, IPayeeDataSource } from "../interfaces/payee-interface";
+import { IFindPayeeQuery, IPayee, IPayeeCreationBody} from "../interfaces/payee-interface";
 import { AccountStatus } from "../interfaces/enum/account-enum";
 import sequelize from "../database";
+import { autoInjectable } from "tsyringe";
+import PayeeDataSource from "../datasources/payee-datasource";
 
+@autoInjectable()
 class PayeeService {
-  private payeeDataSource: IPayeeDataSource;
+  private payeeDataSource: PayeeDataSource;
 
-  constructor(_payeeDataSource: IPayeeDataSource) {
+  constructor(_payeeDataSource: PayeeDataSource) {
     this.payeeDataSource = _payeeDataSource;
   }
   async fetchPayeeByAccountNumberAndBank(accountNumber: string, bankCode: string): Promise<IPayee | null>{

@@ -1,12 +1,16 @@
 import { where } from "sequelize";
-import { IFindAccountQuery, IAccount, IAccountCreationBody, IAccountDataSource } from "../interfaces/account-interface";
+import { IFindAccountQuery, IAccount, IAccountCreationBody } from "../interfaces/account-interface";
 import { AccountStatus } from "../interfaces/enum/account-enum";
 import sequelize from "../database";
+import { autoInjectable } from "tsyringe";
+import AccountDataSource from "../datasources/account-datasource";
 
+
+@autoInjectable()
 class AccountService {
-  private accountDataSource: IAccountDataSource;
+  private accountDataSource: AccountDataSource;
 
-  constructor(_accountDataSource: IAccountDataSource) {
+  constructor(_accountDataSource: AccountDataSource) {
     this.accountDataSource = _accountDataSource;
   }
 

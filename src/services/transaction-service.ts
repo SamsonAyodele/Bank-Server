@@ -1,83 +1,93 @@
-import { TransactionGateway, TransactionStatus, TransactionTypes } from "../interfaces/enum/transaction-enum"
-import { IFindTransactionQuery, ITransaction, ITransactionCreationBody, ITransactionDataSource } from "../interfaces/transaction-interface"
-import {v4 as uuidv4} from 'uuid'
 
-class TransactionService{
-    private transactionDataSource: ITransactionDataSource
+import { autoInjectable } from "tsyringe";
+import { TransactionGateway, TransactionStatus, TransactionTypes } from "../interfaces/enum/transaction-enum";
+import { IFindTransactionQuery, ITransaction, ITransactionCreationBody, ITransactionDataSource } from "../interfaces/transaction-interface";
+import { v4 as uuidv4 } from "uuid";
+import TransactionDataSource from "../datasources/transaction-datasource";
 
-    constructor(_transactionDataSource: ITransactionDataSource){
-        this.transactionDataSource = _transactionDataSource
+
+@autoInjectable()
+class TransactionService {
+  private transactionDataSource: TransactionDataSource;
+
+  constructor(_transactionDataSource: TransactionDataSource) {
+    this.transactionDataSource = _transactionDataSource;
+  }
+
+  async fetchTransactionByReference(reference: string): Promise<ITransaction | null> {
+    const query = {
+      where: { reference },
+      raw: true,
+    };
+    return this.transactionDataSource.fetchOne(query);
+  }
+
+  async depositByPaystack(data: Partial<ITransaction>): Promise<ITransaction> {
+
+    const deposit = {
+      ...data,
+      type: TransactionTypes.DEPOSIT,
+      detail: {
+        ...data.detail,
+        gateway: TransactionGateway.PAYSTACK
+      },
+      status: TransactionStatus.IN_PROGRESS
+    } as ITransactionCreationBody;
+    return this.transactionDataSource.create(deposit)
+  }
+
+  private generatePaymentReference(): string {
+    return uuidv4();
+  }
+  
+  async setStatus(transactionId:string , status  :string , options: Partial<IFindTransactionQuery> = {}): Promise<void> {
+    const filter = {where : {id:transactionId },...options};
+    const update = {
+      status 
     }
+    await this.transactionDataSource.updateOne( update, filter);
+  }
 
-    async fetchTransactionByReference(reference: string): Promise<ITransaction | null> {
-        const query = {
-            where: {reference},
-            raw: true,
-        }
-        return this.transactionDataSource.fetchOne(query)
-    }
+  async processInternalTransfer(data:Partial<ITransaction> , options: Partial<IFindTransactionQuery> = {}):Promise<ITransaction> {
+    const record  = {
+      ...data,
+      type: TransactionTypes.TRANSFER,
+      reference: this.generatePaymentReference(),
+      detail: {
+        ...data.detail,
+        gateway: TransactionGateway.NONE
+      },
+      status: TransactionStatus.COMPLETED
+    } as ITransactionCreationBody;
+    return this.transactionDataSource.create(record,options)
+  }
 
-    async depositByPaystack(data: Partial<ITransaction>): Promise<ITransaction> {
-        const deposit = {
-            ...data,
-            type: TransactionTypes.DEPOSIT,
-            detail:{
-                ...data.detail,
-                gateway:TransactionGateway.PAYSTACK
-            },
-            status:TransactionStatus.IN_PROGRESS
-        } as ITransactionCreationBody
-        return this.transactionDataSource.create(deposit)
-    }
+  async processExternalTransfer(data:Partial<ITransaction> , options: Partial<IFindTransactionQuery> = {}):Promise<ITransaction> {
+    const record  = {
+      ...data,
+      type: TransactionTypes.TRANSFER,
+      detail: {
+        ...data.detail,
+      },
+      status: TransactionStatus.IN_PROGRESS
+    } as ITransactionCreationBody;
+    return this.transactionDataSource.create(record,options)
+  }
 
-    private generatePaymentReference (): string {
-        return uuidv4()
-    }
 
-    
-    async setStatus(transactionId: string, status: string, options: Partial<IFindTransactionQuery> = {}): Promise<void> {
-        const filter = {where: {id:transactionId}, ...options}
-        const update = {
-         status
-        }
-        return await this.transactionDataSource.updateOne( update as any, filter)
-      }
+  async getTransactionsByField(record:Partial<ITransaction>) : Promise<ITransaction[]>{
+    const query = {where:{...record} , raw: true};
+    return this.transactionDataSource.fetchAll(query)
+  }
 
-      async processInternalTransfer(data: Partial<ITransaction>, options: Partial<IFindTransactionQuery> = {}): Promise<ITransaction>{
-        const record = {
-            ...data,
-            type: TransactionTypes.TRANSFER,
-            reference: this.generatePaymentReference(),
-            detail:{
-                ...data.detail,
-                gateway:TransactionGateway.NONE
-            },
-            status:TransactionStatus.COMPLETED
-        } as ITransactionCreationBody
-        return this.transactionDataSource.create(record,options)
-      }
+  async getTransactionByField(record:Partial<ITransaction>) : Promise<ITransaction | null>{
+    const query = {where:{...record} , raw: true} as IFindTransactionQuery;
+    return this.transactionDataSource.fetchOne(query)
+  }
 
-      async processExternalTransfer(data:Partial<ITransaction> , options: Partial<IFindTransactionQuery> = {}):Promise<ITransaction> {
-        const record  = {
-          ...data,
-          type: TransactionTypes.TRANSFER,
-          detail: {
-            ...data.detail,
-          },
-          status: TransactionStatus.IN_PROGRESS
-        } as ITransactionCreationBody;
-        return this.transactionDataSource.create(record,options)
-      }
 
-      async getTransactionsByField(record:Partial<ITransaction>) : Promise<ITransaction[]>{
-        const query = {where:{...record} , raw: true};
-        return this.transactionDataSource.fetchAll(query)
-      }
-    
-      async getTransactionByField(record:Partial<ITransaction>) : Promise<ITransaction | null>{
-        const query = {where:{...record} , raw: true} as IFindTransactionQuery;
-        return this.transactionDataSource.fetchOne(query)
-      }
 }
 
-export default TransactionService 
+export default TransactionService;
+
+

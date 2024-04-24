@@ -72,13 +72,13 @@ const PayeeModel = Db.define<IPayeeModel>(
           payee.forEach((tx, index) => {
             if (tx.detail && typeof tx.detail === "string") {
               tx.detail = Utility.parseToObject(tx.detail);
-            //   tx.bankName = Utility.getBankName(tx.bankCode);
+              tx.bankName = Utility.getBankName(tx.bankCode);
             }
           });
         } else {
           if (payee && typeof payee == "object") {
             payee.detail = Utility.parseToObject(payee.detail);
-            // payee.bankName = Utility.getBankName(payee.bankCode);
+            payee.bankName = Utility.getBankName(payee.bankCode);
 
           }
         }

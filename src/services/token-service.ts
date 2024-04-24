@@ -1,9 +1,12 @@
 import moment from "moment";
-import { IFindTokenQuery, IToken, ITokenCreationBody, ITokenDataSource } from "../interfaces/token-interface";
+import { IFindTokenQuery, IToken, ITokenCreationBody } from "../interfaces/token-interface";
 import utility from "../utils/index.utils";
+import { autoInjectable } from "tsyringe";
+import TokenDataSource from "../datasources/token-datsource";
 
+@autoInjectable()
 class TokenService {
-  private tokenDataSource: ITokenDataSource;
+  private tokenDataSource: TokenDataSource;
   private readonly tokenExpires: number = 5;
   public TokenTypes = {
     FORGOT_PASSWORD: "FORGOT_PASSWORD",
@@ -13,7 +16,7 @@ class TokenService {
     USED: "USED",
   };
 
-  constructor(_tokenDataSource: ITokenDataSource) {
+  constructor(_tokenDataSource: TokenDataSource) {
     this.tokenDataSource = _tokenDataSource;
   }
 
