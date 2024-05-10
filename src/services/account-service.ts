@@ -45,6 +45,11 @@ class AccountService {
     return this.accountDataSource.create(record);
   }
 
+  async getAccounts(): Promise<IAccount[]>{
+    const query = {where: {}, raw: true}
+    return this.accountDataSource.fetchAll(query)
+  }
+
   async getAccountByField(record: Partial<IAccount>) {
     const query = {
       where: { ...record },

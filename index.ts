@@ -6,6 +6,7 @@ import dbInit from "./src/database/init"
 import UserRouter from "./src/router/user.router";
 import AccountRouter from "./src/router/account.router";
 import TransactionRouter from "./src/router/transaction-router"
+import AdminRouter from "./src/router/admin-router";
 const port = process.env.PORT;
 
 dotenv.config();
@@ -32,6 +33,7 @@ app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
 app.use("/api/user", UserRouter);
 app.use("/api/account", AccountRouter);
 app.use("/api/transaction", TransactionRouter);
+app.use("/api/admin", AdminRouter)
 
 app.get("/", (req: Request, res: Response) => {
   res.send(`Welcome to My ${process.env.APP_NAME}`);

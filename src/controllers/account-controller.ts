@@ -4,6 +4,7 @@ import { ResponseCode } from "../interfaces/enum/code.enum";
 import AccountService from "../services/account-service";
 import PayeeService from "../services/payee-service";
 import { autoInjectable } from "tsyringe";
+import Permissions from "../permission/index";
 
 @autoInjectable()
 class AccountController {
@@ -71,6 +72,41 @@ class AccountController {
         return utility.handleError(res, "Payee does not exist", ResponseCode.NOT_FOUND);
       }
       return utility.handleSuccess(res, "Payee fetched successfully", { payee }, ResponseCode.SUCCESS);
+    } catch (error) {
+      return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+    }
+  }
+
+  async getAllUserAccountsByAdmin(req:Request, res:Response){
+    try {
+      const params = {...req.body}
+      const admin = {...req.body.user}
+      const permission = Permissions.can(admin.roles).readAny("accounts") 
+      if(!permission.granted){
+        return utility.handleError(res, 'Permission not granted', ResponseCode.NOT_FOUND)
+      }
+      let accounts = await this.accountService.getAccounts()
+      return utility.handleSuccess(res, "Successfully", { accounts }, ResponseCode.SUCCESS);
+    } catch (error) {
+      return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+    }
+  }
+
+  async getUserAccountAdmin(req:Request, res:Response){
+    try {
+      const params = {...req.params}
+      const admin = {...req.body.user}
+      const permission = Permissions.can(admin.roles).readAny("accounts") 
+      if(!permission.granted){
+        return utility.handleError(res, 'Permission not granted', ResponseCode.NOT_FOUND)
+      }
+
+      let account = await this.accountService.getAccountByField({id: utility.escapeHtml(params.id)})
+      if(!account){
+        return utility.handleError(res, 'Account does not exist', ResponseCode.NOT_FOUND)
+      }
+
+      return utility.handleSuccess(res, "Successfully", { account }, ResponseCode.SUCCESS);
     } catch (error) {
       return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
     }

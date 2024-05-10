@@ -8,5 +8,7 @@ export const AccountTypes = {
     ACTIVE: 'ACTIVE',
     DORMANT: 'DORMANT',
     FROZEN: 'FROZEN',
-    UNDER_REVIEW: 'UNDER_REVIEW'
+    UNDER_REVIEW: 'UNDER_REVIEW',
+    // SUSPENDED: 'SUSPENDED',
+    // DELETED: 'DELETED'
   }

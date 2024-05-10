@@ -10,6 +10,7 @@ import { IAccount } from "../interfaces/account-interface"
 import { ITransaction } from "../interfaces/transaction-interface"
 import PayeeService from "../services/payee-service"
 import { autoInjectable } from "tsyringe"
+import Permissions from "../permission/index"
 
 @autoInjectable()
 class TransactionController {
@@ -89,7 +90,7 @@ class TransactionController {
             accountId: senderAccount.id,
             amount,
             detail: {
-              recieverAccountNumber: receiverAccount.accountNumber,
+              receiverAccountNumber: receiverAccount.accountNumber,
               gateway:TransactionGateway.PAYSTACK
             }
           }
@@ -255,6 +256,22 @@ class TransactionController {
           return utility.handleSuccess(res, "Transaction fetched successfully", { transaction }, ResponseCode.SUCCESS);
         } catch (error) {
           return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+        }
+      }
+
+      async getAllTransactionsAdmin(req:Request, res:Response){
+        try {
+            const params = {...req.body}
+            const admin = {...req.body.user}
+            const permission = Permissions.can(admin.roles).readAny("transactions") 
+            if(!permission.granted){
+              return utility.handleError(res, 'Permission not granted', ResponseCode.NOT_FOUND)
+            }
+            let filter = {} as ITransaction
+            let transactions = await this.transactionService.getTransactionsByField({...filter})
+           return utility.handleSuccess(res, 'Successful', {transactions}, ResponseCode.SUCCESS)
+        } catch (error) {
+            return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
         }
       }
 }

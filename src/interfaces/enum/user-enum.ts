@@ -13,4 +13,6 @@ export const EmailStatus = {
     ACTIVE: 'ACTIVE',
     INACTIVE: 'INACTIVE',
     SUSPENDED: 'SUSPENDED',
+    FROZEN: 'FROZEN',
+    DELETED: 'DELETED'
   };

@@ -11,6 +11,7 @@ import { IToken } from "../interfaces/token-interface";
 import EmailService from "../services/email-service";
 import moment from "moment";
 import { autoInjectable } from "tsyringe";
+import Permissions from "../permission/index"
 
 @autoInjectable()
 class UserController {
@@ -132,6 +133,82 @@ class UserController {
       return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
     }
   }
+
+  async getAllUsersByAdmin(req:Request, res:Response){
+try {
+  const admin = {...req.body.user}
+  const permission = Permissions.can(admin.roles).readAny("users") 
+  if(!permission.granted){
+    return utility.handleError(res, 'Permission not granted', ResponseCode.NOT_FOUND)
+  }
+
+  let users = (await this.userService.getAllUsers())
+  if(users && users.length > 0){
+    users = users.map((item)=>{
+      item.password = ''
+      return item
+    })
+  }
+  return utility.handleSuccess(res, 'User fetched successfully',{users}, ResponseCode.SUCCESS)
+} catch (error) {
+  return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+}
+  }
+
+  async getSingleUserById(req:Request, res:Response){
+    try {
+      const params = {...req.params}
+      const admin = {...req.body.user}
+      const permission = Permissions.can(admin.roles).readAny("users") 
+      if(!permission.granted){
+        return utility.handleError(res, 'Permission not granted', ResponseCode.NOT_FOUND)
+      }
+
+      let user = await this.userService.getUserByField({id: utility.escapeHtml(params.id)})
+      if(!user){
+        return utility.handleError(res, 'User does not exist', ResponseCode.NOT_FOUND)
+      }
+      user.password = ''
+      return utility.handleSuccess(res, 'User fetched successfully',{user}, ResponseCode.SUCCESS)
+    } catch (error) {
+      return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+    }
+  }
+
+  async setAccountStatus(req:Request, res:Response){
+    try {
+      const params = {...req.params}
+      const admin = {...req.body.user}
+      const permission = Permissions.can(admin.roles).readAny("users") 
+      if(!permission.granted){
+        return utility.handleError(res, 'Permission not granted', ResponseCode.NOT_FOUND)
+      }
+
+      let user = await this.userService.getUserByField({id: params.userId})
+      if(!user){
+        return utility.handleError(res, 'Invalid user record', ResponseCode.NOT_FOUND)
+      }
+      await this.userService.updateRecord({id: user.id}, ({accountStatus:params.status}))
+      return utility.handleSuccess(res, 'Account status updated successfully',{user}, ResponseCode.SUCCESS)
+    } catch (error) {
+      return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+    }
+  }
+
+  async getProfile(req:Request, res:Response){
+    try {
+      const params = {...req.body}
+      let user = await this.userService.getUserByField({id: params.user.id})
+      if(!user){
+        return utility.handleError(res, 'User does not exist', ResponseCode.NOT_FOUND)
+      }
+      user.password= ''
+      return utility.handleSuccess(res, 'User fetched successfully',{user}, ResponseCode.SUCCESS)
+    } catch (error) {
+      return utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+    }
+  }
+
 }
 
 export default UserController;

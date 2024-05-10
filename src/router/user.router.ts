@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import UserController from '../controllers/user-controller';
-import { validator } from '../middlewares/index.middleware';
+import { Auth, validator } from '../middlewares/index.middleware';
 import ValidationSchema from '../validators/user-validator-schema';
 import { container } from 'tsyringe';
 
@@ -27,6 +27,9 @@ const createUserRoute = () => {
     return userController.resetPassword(req, res);
   });
 
+  router.get('/profile',Auth() ,  (req: Request, res: Response) => {
+    return userController.getProfile(req, res);
+  });
   return router;
 };
 
