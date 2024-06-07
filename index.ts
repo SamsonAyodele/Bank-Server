@@ -7,7 +7,7 @@ import UserRouter from "./src/router/user.router";
 import AccountRouter from "./src/router/account.router";
 import TransactionRouter from "./src/router/transaction-router"
 import AdminRouter from "./src/router/admin-router";
-const port = process.env.PORT;
+const port = process.env.DB_PORT;
 
 dotenv.config();
 
