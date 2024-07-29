@@ -19,6 +19,9 @@ class TransactionDataSource implements ITransactionDataSource {
     await TransactionModel.update(data , query);
   }
 
+  async fetchSum(field: keyof ITransaction,query: IFindTransactionQuery) : Promise<number>{
+    return await TransactionModel.sum(field,query);
+  }
 }
 
 export default TransactionDataSource;

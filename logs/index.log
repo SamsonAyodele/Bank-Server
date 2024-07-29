@@ -53,3 +53,37 @@
 2024-04-22 10-57-40 error : invalid token
 2024-04-22 10-58-31 error : invalid token
 2024-04-22 10-59-05 error : Invalid login details
+2024-06-09 05-29-58 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 4fb4d7f45d1cf-57c5d21517dsm3165739a12.69 - gsmtp
+2024-06-09 05-31-55 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 4fb4d7f45d1cf-57aadf9d064sm5088397a12.10 - gsmtp
+2024-06-09 05-34-25 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 4fb4d7f45d1cf-57aae1008adsm5158112a12.38 - gsmtp
+2024-06-09 05-50-45 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a6f116dc32fsm98701566b.26 - gsmtp
+2024-06-09 05-53-37 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a6f127398c4sm82013166b.202 - gsmtp
+2024-06-09 05-54-25 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a6f110ff957sm103818166b.36 - gsmtp
+2024-06-09 05-54-31 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a6efec85ae8sm181148766b.184 - gsmtp
+2024-06-09 05-55-09 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a6efdb3fe18sm194149666b.173 - gsmtp
+2024-06-11 02-00-48 error : Email already exist
+2024-06-11 02-02-36 error : Invalid login details
+2024-06-11 02-03-31 error : getaddrinfo ENOTFOUND smtp.gmail.com
+2024-06-11 02-06-13 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a6f0f5ee702sm347432966b.52 - gsmtp
+2024-06-11 02-26-03 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 4fb4d7f45d1cf-57c82a5e0f9sm2542139a12.12 - gsmtp
+2024-06-11 09-34-31 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a6f10d1c044sm361077266b.163 - gsmtp
+2024-06-11 10-09-02 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a6efae62543sm471597266b.187 - gsmtp
+2024-06-11 10-10-00 error : Email already exist
+2024-06-11 10-10-37 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials af79cd13be357-795330b24d4sm499783185a.96 - gsmtp
+2024-06-11 10-40-25 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-a6f1b45e717sm281560766b.82 - gsmtp
+2024-06-11 10-42-42 error : Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 4fb4d7f45d1cf-57c9cf42d07sm335310a12.63 - gsmtp
